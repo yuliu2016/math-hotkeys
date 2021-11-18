@@ -3,6 +3,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+; This script allows hotkeys to be used for Equation Editor in MS Office
 
 
 ;https://www.autohotkey.com/docs/Hotstrings.htm
@@ -103,20 +104,55 @@ SeqQuote(def) {  ;why is this magic?
         Send ^I
 }
 
-
+DSpace() {
+    Send {Space}
+    Sleep 80
+    Send {Space}
+    return
+}
 
 >^I::
-SendRaw, \int_a^b dx
-Sleep 80
-Send {Left}
-Sleep, 80
-Send {Left}
-; sleep 80
-; send {space down} 
-; sleep 80 
-; send {space up}
-; sleep 80
-; send {space down} 
-; sleep 80
-; send {space up}
+Input, IVar, L1
+if (IVar = "I") {
+    SendRaw, \int_a^b dx
+    Sleep 80
+    Send {Left}
+    Sleep, 80
+    Send {Left}
+} if (IVar = "O") {
+    SendRaw, \int
+    DSpace()
+    SendRaw, dx
+    Sleep 80
+    Send {Left}
+    Sleep, 80
+    Send {Left}
+} else if (IVar = "L") {
+    SendRaw, \scriptL {}
+    Send {Space}
+    Sleep 80
+    Send {Left}
+} else if (IVar = "U") {
+    SendRaw, \scriptU (t-)
+    Send {Space}
+    Sleep 80
+    Send {Left}
+} else if (IVar = "P") {
+    SendRaw, \prod
+    DSpace()
+}
+return
+
+
+>^K::
+Input, KVar, L1
+if (KVar = "I") {
+    Send, ∞
+}
+return
+
+
+>^`::
+SendRaw, \bar
+DSpace()
 return
