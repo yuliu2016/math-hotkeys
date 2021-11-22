@@ -148,11 +148,38 @@ return
 Input, KVar, L1
 if (KVar = "I") {
     Send, ∞
+} else if (KVar = "=") {
+    Send, ≡
+} else if (KVar = "T") {
+    Send, ×
+} else if (KVar = "D") {
+    Send, ∂
 }
 return
 
+>^+K::
+Input, KVar, L1
+if (KVar = "D") {
+    Send, °
+}
+return
+
+>^R::
+SendRaw, \sqrt
+DSpace()
+Send {Left}
+return
 
 >^`::
 SendRaw, \bar
 DSpace()
+return
+
+
+>^6::
+Input, BarVar, L1
+if (BarVar = "U") {  ;todo check for right key
+    SendRaw, \vec
+    DSpace()
+}
 return
