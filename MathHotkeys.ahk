@@ -59,38 +59,6 @@ return
 
 ; Α α, Β β, Γ γ, Δ δ, Ε ε, Ζ ζ, Η η, Θ θ, Ι ι, Κ κ, Λ λ, Μ μ, Ν ν, Ξ ξ, Ο ο, Π π, Ρ ρ, Σ σ/ς, Τ τ, Υ υ, Φ φ, Χ χ, Ψ ψ, Ω ω
 
-#IfWinActive WINWORD.EXE
->^H::
-SeqQuote({
-(Join,
-    A : "\Alpha"
-    B : "Β"
-    C : "Χ"
-    D : "Δ"
-    E : "Ε"
-    F : "Φ"
-    G : "Γ"
-    H : "Η"
-    I : "Ι"
-    K : "\Kappa"
-    L : "Λ"
-    M : "Μ"
-    N : "Ν"
-    O : "Ο"
-    P : "Π"
-    Q : "Θ"
-    R : "Ρ"
-    S : "\Sigma"
-    T : "\Tau"
-    U : "Υ"
-    W : "\Omega"
-    X : "Ξ"
-    Y : "Ψ"
-    Z : "Ζ"
-)})
-return 
-
-#IfWinActive
 >^H::
 SeqQuote({
 (Join,
@@ -121,6 +89,39 @@ SeqQuote({
 )})
 return 
 
+
+#IfWinActive WINWORD.EXE
+>^H::
+SeqQuote({
+(Join,
+    A : "\Alpha"
+    B : "\Beta"
+    C : "Χ"
+    D : "Δ"
+    E : "Ε"
+    F : "Φ"
+    G : "Γ"
+    H : "Η"
+    I : "Ι"
+    K : "\Kappa"
+    L : "Λ"
+    M : "Μ"
+    N : "Ν"
+    O : "Ο"
+    P : "Π"
+    Q : "Θ"
+    R : "Ρ"
+    S : "\Sigma"
+    T : "\Tau"
+    U : "Υ"
+    W : "\Omega"
+    X : "Ξ"
+    Y : "Ψ"
+    Z : "Ζ"
+)})
+return 
+
+#IfWinActive
 SeqQuote(def) {  ;why is this magic?
     matchlist := ""
     maxlen := 1
@@ -186,6 +187,8 @@ if (KVar = "I") {
     Send, ×
 } else if (KVar = "D") {
     Send, ∂
+} else if (KVar = "~") {
+    Send, ≈
 }
 return
 
@@ -193,6 +196,10 @@ return
 Input, KVar, L1
 if (KVar = "D") {
     Send, °
+} else if (KVar = "A") {
+    Send, ∠
+} else if (KVar = ".") {
+    Send, ⋅
 }
 return
 
@@ -221,3 +228,19 @@ if (BarVar = "U") {  ;todo check for right key
     DSPace()
 }
 return
+
+>^/::
+Send std::
+return
+
+>^+/::
+Send std::cout <<
+Send {Space}
+return
+
+>^!/::
+Send {Space}
+Send << "\n";
+
+>^!G::
+SendRaw grep --color --exclude-dir={Debug,Release,Listings,Objects} -ir
